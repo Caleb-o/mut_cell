@@ -7,18 +7,37 @@
 gleam add mut_cell@1
 ```
 ```gleam
-import mut_cell
+import cell
+import gleam/int
+import gleam/io
 
 pub fn main() -> Nil {
-  // TODO: An example of the project in use
+  // Create a cell
+  let icell = cell.make(10)
+
+  // Get the current value
+  echo cell.get(icell)
+
+  // Update a cell with a function
+  echo cell.update(icell, fn(value) { value * 2 })
+
+  // Create a callback
+  let cb = fn(value) { io.println("New value set: " <> int.to_string(value)) }
+
+  // Create a subscriber, which will call our callback
+  let sub = cell.subscribe(icell, cb)
+
+  // This operation (and update) will notify subscribers calling their callbacks
+  cell.set(icell, 10)
+
+  // Unsubscribe from the cell
+  sub()
+
+  // No notifications to send here
+  cell.set(icell, 20)
+
+  Nil
 }
 ```
 
 Further documentation can be found at <https://hexdocs.pm/mut_cell>.
-
-## Development
-
-```sh
-gleam run   # Run the project
-gleam test  # Run the tests
-```
