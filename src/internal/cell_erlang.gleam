@@ -1,7 +1,7 @@
 @target(erlang)
-import cells/subscriber
-@target(erlang)
 import gleam/dict.{type Dict}
+@target(erlang)
+import internal/subscriber
 
 @target(erlang)
 import gleam/erlang/atom

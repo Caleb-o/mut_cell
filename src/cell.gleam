@@ -1,9 +1,9 @@
 @target(erlang)
-import cells/cell_erlang.{type Cell} as cells
+import internal/cell_erlang.{type Cell} as cells
 @target(javascript)
-import cells/cell_javascript.{type Cell} as cells
+import internal/cell_javascript.{type Cell} as cells
 
-import cells/subscriber
+import internal/subscriber
 
 pub fn make(value: a) -> Cell(a) {
   cells.make(value)
