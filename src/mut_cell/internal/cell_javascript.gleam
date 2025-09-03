@@ -1,5 +1,5 @@
 @target(javascript)
-import cells/subscriber
+import mut_cell/internal/subscriber
 
 @target(javascript)
 pub type Cell(a)
