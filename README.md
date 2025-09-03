@@ -12,34 +12,34 @@ This library offers an interior mutability system that manages internal state up
 gleam add mut_cell@1
 ```
 ```gleam
-import cell
+import mut_cell
 import gleam/int
 import gleam/io
 
 pub fn main() -> Nil {
-  // Create a cell
-  let icell = cell.make(10)
+  // Create a mut_cell
+  let icell = mut_cell.make(10)
 
   // Get the current value
-  echo cell.get(icell)
+  echo mut_cell.get(icell)
 
-  // Update a cell with a function
-  echo cell.update(icell, fn(value) { value * 2 })
+  // Update a mut_cell with a function
+  echo mut_cell.update(icell, fn(value) { value * 2 })
 
   // Create a callback
   let cb = fn(value) { io.println("New value set: " <> int.to_string(value)) }
 
   // Create a subscriber, which will call our callback
-  let sub = cell.subscribe(icell, cb)
+  let sub = mut_cell.subscribe(icell, cb)
 
   // This operation (and update) will notify subscribers calling their callbacks
-  cell.set(icell, 10)
+  mut_cell.set(icell, 10)
 
-  // Unsubscribe from the cell
+  // Unsubscribe from the mut_cell
   sub()
 
   // No notifications to send here
-  cell.set(icell, 20)
+  mut_cell.set(icell, 20)
 
   Nil
 }
